@@ -24,13 +24,13 @@ const Home = () => {
   }, []);
 
   return (
-    <>
+    <div className="overflow-hidden">
       <NavBar />
       <HeroSection />
       <CategoryCarousel />
       <LatestJobs />
       <Footer />
-    </>
+    </div>
   );
 };
 
