@@ -99,7 +99,7 @@ const login = async (req: Request, res: Response) => {
 
     res
       .cookie('token', token, { httpOnly: true, secure: true, sameSite: 'none' })
-      .json({ message: `Welcome Back ${user.fullName}`, user, token, success: true });
+      .json({ message: `Welcome Back ${user.fullName}`, user, success: true });
   } catch (error) {
     console.log(error);
   }
