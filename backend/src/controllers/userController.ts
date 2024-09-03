@@ -102,7 +102,7 @@ const login = async (req: Request, res: Response) => {
       .cookie("token", token, {
         maxAge: 1000 * 60 * 60 * 24,
         httpOnly: true,
-        sameSite: "strict",
+        sameSite: "none",
       })
       .json({ message: `Welcome Back ${user.fullName}`, user, success: true });
   } catch (error) {
