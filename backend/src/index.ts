@@ -11,7 +11,7 @@ import applicationRoute from "./routes/applicationRoute";
 const app = express();
 const PORT = 3009;
 const corsOptions = {
-  origin: ["*", "http://localhost:5173"],
+  origin: ["https://mern-job-portal-phi.vercel.app", "http://localhost:5173"],
   credentials: true,
 };
 app.use(cors(corsOptions));
