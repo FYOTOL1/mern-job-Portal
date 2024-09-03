@@ -9,7 +9,7 @@ const JobsDescription = () => {
     const { singleJob } = useAppSelector(state => state.job)
     const { user } = useAppSelector(state => state.auth)
 
-    const isInitApplied = user?._id && singleJob && singleJob?.applications.some(app => app.applicant === user._id);
+    const isInitApplied = user?._id && singleJob && singleJob?.applications.some(app => app.applicant as unknown as string === user._id);
 
     const [isApplied, setIsApplied] = useState(isInitApplied)
 

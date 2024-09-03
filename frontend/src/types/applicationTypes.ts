@@ -6,7 +6,7 @@ interface IApplication {
 
     job: IJob;
 
-    applicant: IUser | string;
+    applicant: IUser;
 
     status?: "pending" | "accepted" | "rejected";
 
