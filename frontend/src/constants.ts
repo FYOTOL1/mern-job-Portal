@@ -1,5 +1,5 @@
 const devMode: boolean = false
-let API_ENDPOINT_URI;
+let API_ENDPOINT_URI: string;
 
 if (!devMode) {
     API_ENDPOINT_URI = "https://mernjobportal-2r18.onrender.com/api/v1"
