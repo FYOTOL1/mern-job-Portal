@@ -34,8 +34,8 @@ const CompaniesTable = () => {
     }
 
     return (
-        <div>
-            <Table>
+        <>
+            <Table className="text-xs sm:text-sm">
                 <TableCaption>A list of your recent registered companies</TableCaption>
                 <TableHeader>
                     <TableRow>
@@ -62,9 +62,9 @@ const CompaniesTable = () => {
                                     <PopoverTrigger>
                                         <MoreHorizontal />
                                     </PopoverTrigger>
-                                    <PopoverContent className="w-32">
+                                    <PopoverContent className="w-20 sm:w-24 md:w-32">
                                         <Link to={`/admin/companies/${e._id}`}>
-                                            <button onClick={() => companyDataHandler(e)} className="flex items-center gap-2 w-fit cursor-pointer">
+                                            <button onClick={() => companyDataHandler(e)} className="flex items-center gap-2 w-fit cursor-pointer text-xs sm:text-sm">
                                                 <Edit2 className='w-4' />
                                                 <span>Edit</span>
                                             </button>
@@ -77,7 +77,7 @@ const CompaniesTable = () => {
                 </TableBody>
             </Table>
             {companies.length <= 0 && <Link to={"/admin/companies/create"}><Button variant={"ghost"} className="text-center w-full text-gray-500 underline">You Haven't Registered Any Company, Yet. </Button></Link>}
-        </div>
+        </>
     )
 }
 

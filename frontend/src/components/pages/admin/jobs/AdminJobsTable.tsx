@@ -35,7 +35,7 @@ const AdminJobsTable = () => {
 
     return (
         <div>
-            <Table>
+            <Table className="text-xs sm:text-sm">
                 <TableCaption>A list of your recent posted jobs</TableCaption>
                 <TableHeader>
                     <TableRow>
@@ -58,7 +58,7 @@ const AdminJobsTable = () => {
                                     <PopoverTrigger>
                                         <MoreHorizontal />
                                     </PopoverTrigger>
-                                    <PopoverContent className="w-32">
+                                    <PopoverContent className="w-20 sm:w-24 md:w-32">
                                         <Link to={`/admin/jobs/${e._id}`}>
                                             <button onClick={() => jobDataHandler(e)} className="flex items-center gap-2 w-fit cursor-pointer bg-gray-100 transition-all hover:bg-gray-200 rounded p-1 px-2 my-1">
                                                 <Edit2 className='w-4' />

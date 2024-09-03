@@ -19,7 +19,7 @@ const Job = ({ job }: Props) => {
   };
 
   return (
-    <div className="p-5 rounded-md shadow-xl bg-white border border-gray-100">
+    <div className="p-5 m-2 rounded-md shadow-xl bg-white border border-gray-100">
       <div className="flex items-center justify-between">
         <p>{daysAgoFunc(job.createdAt as Date) === 0 ? "Today" : daysAgoFunc(job.createdAt as Date) + " Days Ago"} </p>
         <Button variant="outline" className="rounded-full" size={"icon"}>
@@ -34,14 +34,14 @@ const Job = ({ job }: Props) => {
           </Avatar>
         </Button>
         <div>
-          <h1 className="font-medium text-lg">{job?.company?.name}</h1>
+          <h1 className="font-medium text-lg text-ellipsis whitespace-nowrap overflow-hidden">{job?.company?.name}</h1>
           <p className="text-sm text-gray-500">{job.location}</p>
         </div>
       </div>
 
       <div>
-        <h1 className="font-bold text-lg my-2">{job.title}</h1>
-        <p className="text-sm text-gray-600">{job.description}</p>
+        <h1 className="font-bold text-lg my-2 text-ellipsis whitespace-nowrap overflow-hidden">{job.title}</h1>
+        <p className="text-sm text-gray-600 text-ellipsis whitespace-nowrap overflow-hidden">{job.description}</p>
       </div>
 
       <div className="flex items-center flex-wrap gap-2 mt-4">

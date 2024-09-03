@@ -64,12 +64,12 @@ const AdminCreateJob = () => {
     return (
         <div>
             <NavBar />
-            <div className="max-w-4xl mx-auto">
+            <div className="max-w-4xl mx-auto px-2">
                 <div className="my-10">
                     <h1 className="font-bold text-2xl">Your Job Title</h1>
                     <p className="text-gray-600">What would you like to give your job title? you can change this later</p>
                 </div>
-                <form onSubmit={submitHandler} className="grid grid-cols-2 gap-4">
+                <form onSubmit={submitHandler} className="grid sm:grid-cols-2 gap-4">
                     <div>
                         <Label>Title</Label>
                         <Input

@@ -55,7 +55,7 @@ const CompanySetup = () => {
     return (
         <div>
             <NavBar />
-            <div className="max-w-xl mx-auto my-10">
+            <div className="max-w-xl mx-auto my-10 px-2">
                 <div className="flex items-center gap-5 py-8">
                     <Link to={"/admin/companies"}>
                         <Button className="flex items-center gap-2 font-semibold">
@@ -65,7 +65,7 @@ const CompanySetup = () => {
                     <h1 className="font-bold text-xl">Company Setup</h1>
                 </div>
                 <form onSubmit={submitHandler}>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <Label>Company Name</Label>
                             <Input

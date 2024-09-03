@@ -25,31 +25,32 @@ const JobsDescription = () => {
         if (!isApplied) {
             dispatch(applyJob(jobId))
             const updateSingleJob = { ...singleJob, applications: [...(singleJob?.applications || []), { applicant: user?._id }] }
-            dispatch(setSingleJob(updateSingleJob)) // For Real Time Update
+            dispatch(setSingleJob(updateSingleJob))
             setIsApplied(true)
         }
     }
 
     return (
-        <div className="max-w-7xl mx-auto my-10">
-            <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2 mt-4">
+        <div className="max-w-7xl mx-auto my-10 px-2">
+            <div className="flex items-center justify-between flex-wrap">
+                <div className="flex items-center flex-wrap gap-2 mt-4">
                     <h1 className="font-bold text-xl">{singleJob !== null && singleJob?.title}</h1>
-                    <Badge variant="secondary" className="text-blue-700 font-bold">{singleJob !== null && singleJob?.position} Positions</Badge>
-                    <Badge variant="secondary" className="text-[#F83002] font-bold capitalize">{singleJob !== null && singleJob?.jobType}</Badge>
-                    <Badge variant="secondary" className="text-[#7209b7] font-bold">{singleJob !== null && singleJob?.salary} USD</Badge>
+                    <Badge variant="secondary" className="text-blue-700 font-bold  text-nowrap">{singleJob !== null && singleJob?.position} Positions</Badge>
+                    <Badge variant="secondary" className="text-[#F83002] font-bold capitalize text-nowrap">{singleJob !== null && singleJob?.jobType}</Badge>
+                    <Badge variant="secondary" className="text-[#7209b7] font-bold text-nowrap">{singleJob !== null && singleJob?.salary} USD</Badge>
                 </div>
 
                 <Button
                     onClick={applyJobHandler}
                     disabled={isApplied as boolean}
-                    className={`rounded-lg ${isApplied
+                    className={`rounded-lg my-2 ${isApplied
                         ? "bg-gray-600 cursor-not-allowed"
                         : "bg-[#7209b7] hover:bg-[#5f32ad]"
                         }`}
                 >
                     {!isApplied ? "Apply Now" : "Already Applied"}
                 </Button>
+
             </div>
             <h1 className="border-b-2 border-b-gray-200 font-medium py-4">{singleJob !== null && singleJob?.description}</h1>
             <div className="my-4">

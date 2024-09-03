@@ -19,10 +19,10 @@ const Companies = () => {
     return (
         <div>
             <NavBar />
-            <div className="max-w-6xl mx-auto my-10">
-                <div className='flex justify-between items-center my-5'>
+            <div className="max-w-6xl mx-auto my-10 px-2">
+                <div className='flex justify-between items-center flex-wrap my-5'>
                     <Input
-                        className="w-fit"
+                        className="w-fit my-2"
                         placeholder='Filter by name'
                         onChange={e => setInput(e.target.value)}
                         value={input}
