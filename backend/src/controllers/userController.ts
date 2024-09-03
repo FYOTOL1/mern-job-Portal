@@ -97,14 +97,9 @@ const login = async (req: Request, res: Response) => {
       profile: user.profile,
     };
 
-    return res
-      .status(200)
-      .cookie("token", token, {
-        maxAge: 1000 * 60 * 60 * 24,
-        httpOnly: true,
-        sameSite: "none",
-      })
-      .json({ message: `Welcome Back ${user.fullName}`, user, success: true });
+    res
+      .cookie('token', token, { httpOnly: true, secure: true, sameSite: 'none' })
+      .json({ message: `Welcome Back ${user.fullName}`, user, token, success: true });
   } catch (error) {
     console.log(error);
   }
