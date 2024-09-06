@@ -26,13 +26,13 @@ const isAuthenticated = async (
 
     const decode = jwt.verify(token, KEY) as MyJwtPayload;
     if (!decode) {
-      return res.status(401).json({ message: "Invalid Token", success: false });
+      return res.status(400).json({ message: "Invalid Token", success: false });
     }
 
     req.id = decode.userId;
     next();
-  } catch (error) {
-    console.log(error);
+  } catch (error: any) {
+    console.log(error.message);
   }
 };
 

@@ -86,7 +86,7 @@ const login = async (req: Request, res: Response) => {
     const token = await jwt.sign(
       tokenBody,
       (process.env.SECRET_JWT_KEY as string) || "ahmedahmosahmedaos12212",
-      { expiresIn: "1d" }
+      { expiresIn: "1y" }
     );
 
     user = {
@@ -110,7 +110,7 @@ const logout = async (req: Request, res: Response) => {
   try {
     return res
       .status(200)
-      .cookie("toke", "", { maxAge: 0 })
+      .clearCookie("token")
       .json({ message: "Logged Out Successfully", success: true });
   } catch (error) {
     console.log(error);
