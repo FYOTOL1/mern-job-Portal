@@ -11,8 +11,8 @@ import applicationRoute from "./routes/applicationRoute";
 const app = express();
 const PORT = 3009;
 const corsOptions = {
-  origin: "*",
-  methods: "*",
+  origin: "https://jobneeded.vercel.app",
+  methods: "GET,POST,PUT,DELETE",
   credentials: true,
 };
 app.use(cors(corsOptions));
