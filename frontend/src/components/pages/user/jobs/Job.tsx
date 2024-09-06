@@ -1,15 +1,20 @@
-import { Bookmark } from "lucide-react";
 import { Button } from "../../../ui/button";
 import { Avatar, AvatarImage } from "../../../ui/avatar";
 import { Badge } from "../../../ui/badge";
 import { Link } from "react-router-dom";
 import { IJob } from "../../../../types/jobTypes";
+import { useTranslation } from "react-i18next";
+import { useAppSelector } from "../../../../hooks/toolkitHooks";
 
 type Props = {
   job: IJob
 }
 
 const Job = ({ job }: Props) => {
+
+  const
+    { lang } = useAppSelector(state => state.auth),
+    { t } = useTranslation()
 
   const daysAgoFunc = (mongodbTime: Date) => {
     const createdAt = new Date(mongodbTime);
@@ -21,10 +26,10 @@ const Job = ({ job }: Props) => {
   return (
     <div className="p-5 m-2 rounded-md shadow-xl bg-white border border-gray-100">
       <div className="flex items-center justify-between">
-        <p>{daysAgoFunc(job.createdAt as Date) === 0 ? "Today" : daysAgoFunc(job.createdAt as Date) + " Days Ago"} </p>
-        <Button variant="outline" className="rounded-full" size={"icon"}>
-          <Bookmark />
-        </Button>
+        {lang === "en" ?
+          <p>{daysAgoFunc(job.createdAt as Date) === 0 ? t("jobs.jobCard.today") : daysAgoFunc(job.createdAt as Date) + " " + t("jobs.jobCard.days")} </p> :
+          <p>{daysAgoFunc(job.createdAt as Date) === 0 ? t("jobs.jobCard.today") : t("jobs.jobCard.days").slice(0, 4) + daysAgoFunc(job.createdAt as Date) + t("jobs.jobCard.days").slice(3)} </p>
+        }
       </div>
 
       <div className="flex items-center gap-2 my-2">
@@ -51,8 +56,8 @@ const Job = ({ job }: Props) => {
       </div>
 
       <div className="flex items-center gap-4 mt-4">
-        <Link to={`/description/${job._id}`}><Button variant="outline">Details</Button></Link>
-        <Button className="bg-[#7209b7]">Save For Later</Button>
+        <Link to={`/description/${job._id}`}><Button variant="outline">{t("jobs.jobCard.details")}</Button></Link>
+        <Button className="bg-[#7209b7]">{t("jobs.jobCard.save")}</Button>
       </div>
     </div>
   );

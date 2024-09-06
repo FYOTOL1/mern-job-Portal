@@ -7,6 +7,7 @@ import { Loader2 } from "lucide-react"
 import { useAppDispatch, useAppSelector } from "../../../../hooks/toolkitHooks"
 import { UpdateUser } from "../../../../store/slices/authSlice"
 import { useNavigate } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 
 type Props = {
     activeEdit: boolean,
@@ -14,19 +15,19 @@ type Props = {
 }
 
 const UpdateProfileDialog = ({ activeEdit, setActiveEdit }: Props) => {
-    const { user, loading, success } = useAppSelector(state => state.auth)
-
-    const dispatch = useAppDispatch()
-    const navigate = useNavigate()
-
-    const [input, setInput] = useState({
-        fullName: user?.fullName || "",
-        email: user?.email || "",
-        phoneNumber: user?.phoneNumber || "",
-        bio: user?.profile?.bio || "",
-        skills: Array.isArray(user?.profile?.skills) && user?.profile?.skills?.join(", ") || "",
-        file: null as File | null,
-    })
+    const
+        { user, loading, success } = useAppSelector(state => state.auth),
+        { t } = useTranslation(),
+        dispatch = useAppDispatch(),
+        navigate = useNavigate(),
+        [input, setInput] = useState({
+            fullName: user?.fullName || "",
+            email: user?.email || "",
+            phoneNumber: user?.phoneNumber || "",
+            bio: user?.profile?.bio || "",
+            skills: Array.isArray(user?.profile?.skills) && user?.profile?.skills?.join(", ") || "",
+            file: null as File | null,
+        })
 
     const changeEventHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.currentTarget;
@@ -63,16 +64,16 @@ const UpdateProfileDialog = ({ activeEdit, setActiveEdit }: Props) => {
     }
 
     return (
-        <div>
+        <>
             <Dialog open={activeEdit}>
                 <DialogContent className="sm:max-w-[425px]" onInteractOutside={() => closeDialog()}>
                     <DialogHeader>
-                        <DialogTitle>Update Profile</DialogTitle>
+                        <DialogTitle>{t("profile.updateProfile.title")}</DialogTitle>
                     </DialogHeader>
                     <form onSubmit={submitHandler}>
                         <div className="grid gap-4 py-4">
                             <div className="grid grid-cols-4 items-center gap-4">
-                                <Label htmlFor="name">Name</Label>
+                                <Label htmlFor="name">{t("profile.updateProfile.name")}</Label>
                                 <Input
                                     id="name"
                                     onChange={(e) => changeEventHandler(e)}
@@ -82,7 +83,7 @@ const UpdateProfileDialog = ({ activeEdit, setActiveEdit }: Props) => {
                                 />
                             </div>
                             <div className="grid grid-cols-4 items-center gap-4">
-                                <Label htmlFor="email">Email</Label>
+                                <Label htmlFor="email">{t("profile.updateProfile.email")}</Label>
                                 <Input
                                     id="email"
                                     onChange={(e) => changeEventHandler(e)}
@@ -92,7 +93,7 @@ const UpdateProfileDialog = ({ activeEdit, setActiveEdit }: Props) => {
                                 />
                             </div>
                             <div className="grid grid-cols-4 items-center gap-4">
-                                <Label htmlFor="number">Number</Label>
+                                <Label htmlFor="number">{t("profile.updateProfile.number")}</Label>
                                 <Input
                                     id="number"
                                     onChange={(e) => changeEventHandler(e)}
@@ -102,7 +103,7 @@ const UpdateProfileDialog = ({ activeEdit, setActiveEdit }: Props) => {
                                 />
                             </div>
                             <div className="grid grid-cols-4 items-center gap-4">
-                                <Label htmlFor="bio">Bio</Label>
+                                <Label htmlFor="bio">{t("profile.updateProfile.bio")}</Label>
                                 <Input
                                     id="bio"
                                     onChange={(e) => changeEventHandler(e)}
@@ -112,17 +113,18 @@ const UpdateProfileDialog = ({ activeEdit, setActiveEdit }: Props) => {
                                 />
                             </div>
                             <div className="grid grid-cols-4 items-center gap-4">
-                                <Label htmlFor="skills">Skills</Label>
+                                <Label htmlFor="skills">{t("profile.updateProfile.skills")}</Label>
                                 <Input
                                     id="skills"
                                     onChange={(e) => changeEventHandler(e)}
                                     value={input.skills}
                                     name="skills"
+                                    placeholder="( , ) letter required between skills"
                                     className="col-span-3"
                                 />
                             </div>
                             <div className="grid grid-cols-4 items-center gap-4">
-                                <Label htmlFor="file">Resume</Label>
+                                <Label htmlFor="file">{t("profile.updateProfile.resume")}</Label>
                                 <Input
                                     required
                                     id="file"
@@ -142,14 +144,14 @@ const UpdateProfileDialog = ({ activeEdit, setActiveEdit }: Props) => {
                                 </Button>
                             ) : (
                                 <Button type="submit" className="w-full my-4">
-                                    Update
+                                    {t("profile.updateProfile.update")}
                                 </Button>
                             )}
                         </DialogFooter>
                     </form>
                 </DialogContent>
             </Dialog>
-        </div>
+        </>
     )
 }
 

@@ -19,6 +19,7 @@ interface ICompany {
 }
 
 interface IJob {
+    experienceLevel: boolean;
     _id: string;
 
     title: string;

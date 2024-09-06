@@ -9,12 +9,14 @@ import { IRejectWithValue } from "../../types/publicTypes";
 type TInitialState = {
   loading: boolean;
   user: IUser | null;
-  success: boolean | null
+  success: boolean | null,
+  lang: "ar" | "en"
 };
 const initialState: TInitialState = {
   loading: false,
   user: null,
-  success: null
+  success: null,
+  lang: "ar"
 };
 
 export const SignupUser = createAsyncThunk<any, FormData, { rejectValue: IRejectWithValue }>("auth/signupUser", async (formData, thunkApi) => {
@@ -84,6 +86,9 @@ const authSlice = createSlice({
     setLoading: (state, { payload }) => {
       state.loading = payload;
     },
+    setLanguage: (state, { payload }) => {
+      state.lang = payload
+    },
     resetSuccess: (state, { payload }) => {
       state.success = payload
     }
@@ -148,5 +153,5 @@ const authSlice = createSlice({
   }
 })
 
-export const { setLoading, resetSuccess } = authSlice.actions;
+export const { setLoading,setLanguage, resetSuccess } = authSlice.actions;
 export default authSlice.reducer;

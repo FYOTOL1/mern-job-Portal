@@ -6,6 +6,7 @@ import { IUser } from "../types/userTypes";
 import { CRequest } from "../types/publicTypes";
 import getDataUri from "../utils/dataUri";
 import cloudinary from "../utils/cloudinary"
+import { devMode } from "../constant";
 
 const register = async (req: Request, res: Response) => {
   try {
@@ -98,7 +99,7 @@ const login = async (req: Request, res: Response) => {
     };
 
     res
-      .cookie('token', token, { httpOnly: true, secure: true, sameSite: 'none' })
+      .cookie('token', token, { httpOnly: true, secure: true, sameSite: devMode ? "strict" : "none" })
       .json({ message: `Welcome Back ${user.fullName}`, user, success: true });
   } catch (error) {
     console.log(error);

@@ -7,7 +7,10 @@ type Props = {
 }
 
 const LatestJobCards = ({ job }: Props) => {
-  const navigate = useNavigate();
+  const
+    navigate = useNavigate()
+
+
   return (
     <div
       onClick={() => navigate(`/description/${job._id}`)}

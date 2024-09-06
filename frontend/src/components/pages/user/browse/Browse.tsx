@@ -6,11 +6,14 @@ import Job from "../jobs/Job";
 import { IJob } from "../../../../types/jobTypes";
 import { Link } from "react-router-dom";
 import { Button } from "../../../ui/button";
+import { useTranslation } from "react-i18next";
 
 const Browse = () => {
   const
-    dispatch = useAppDispatch(),
-    { allJobs, searchedQuery } = useAppSelector(state => state.job)
+    { allJobs, searchedQuery } = useAppSelector(state => state.job),
+    { t } = useTranslation(),
+    dispatch = useAppDispatch()
+
 
 
   useEffect(() => {
@@ -26,16 +29,16 @@ const Browse = () => {
       <NavBar />
       <div className='max-w-7xl mx-auto my-10 px-2'>
         <Link to={"/"}>
-          <Button>Back</Button>
+          <Button>{t("browse.back")}</Button>
         </Link>
-        <h1 className='font-bold text-xl my-10'>Search Results ({allJobs.length})</h1>
+        <h1 className='font-bold text-xl my-10'>{t("browse.searchResult")} {allJobs.length}</h1>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
           {
             allJobs.length ? allJobs.map((job: IJob) => {
               return (
                 <Job job={job} />
               )
-            }) : <span className="text-gray-500">No Result Found!</span>
+            }) : <span className="text-gray-500">{t("browse.noResultFound")}</span>
           }
         </div>
 

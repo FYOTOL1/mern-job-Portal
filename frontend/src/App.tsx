@@ -16,8 +16,19 @@ import Applications from "./components/pages/admin/jobs/Applications";
 import ProtectedAdminRoutes from "./middlewares/ProtectedAdminRoutes";
 import ProtectedAuthRoutes from "./middlewares/ProtectedAuthRoutes";
 import ProtectedUserRoutes from "./middlewares/ProtectedUserRoutes";
+import { useAppSelector } from "./hooks/toolkitHooks";
+import "./lib/i18n"
+import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 const App = () => {
+  const { lang } = useAppSelector(state => state.auth),
+    { i18n } = useTranslation()
+
+  useEffect(() => {
+    i18n.changeLanguage(lang)
+  }, [i18n, lang])
+
   const appRouter = createBrowserRouter([
     {
       path: "/",
@@ -80,9 +91,9 @@ const App = () => {
   ]);
 
   return (
-    <>
+    <div lang={lang} dir={lang === "ar" ? "rtl" : "ltr"}>
       <RouterProvider router={appRouter} />
-    </>
+    </div >
   );
 };
 

@@ -12,11 +12,13 @@ import {
 } from "../../../ui/table";
 import { getUserAppliedJobs } from "../../../../store/slices/jobSlice";
 import { IApplication } from "../../../../types/applicationTypes";
+import { useTranslation } from "react-i18next";
 
 const AppliedJobTable = () => {
   const
     { userAppliedJobs } = useAppSelector(state => state.job),
-    dispatch = useAppDispatch()
+    dispatch = useAppDispatch(),
+    { t } = useTranslation()
 
   useEffect(() => {
     dispatch(getUserAppliedJobs(''))
@@ -25,13 +27,13 @@ const AppliedJobTable = () => {
   return (
     <div>
       <Table>
-        <TableCaption>A list of your recent jobs</TableCaption>
+        <TableCaption>{t("profile.tableMessage")}</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead>Job Role</TableHead>
-            <TableHead>Company</TableHead>
-            <TableHead>Date</TableHead>
-            <TableHead className="text-right">Status</TableHead>
+            <TableHead className="text-start">{t("profile.jobRole")}</TableHead>
+            <TableHead className="text-start">{t("profile.company")}</TableHead>
+            <TableHead className="text-start">{t("profile.date")}</TableHead>
+            <TableHead className="text-right">{t("profile.status")}</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -43,10 +45,10 @@ const AppliedJobTable = () => {
               <TableCell className="text-right">
                 {
                   e.status === "accepted" ?
-                    <Badge className="bg-green-500">{e.status}</Badge> :
+                    <Badge className="bg-green-500">{t("profile.accepted")}</Badge> :
                     e.status === "rejected" ?
-                      <Badge className="bg-red-600">{e.status}</Badge> :
-                      <Badge>{e.status}</Badge>
+                      <Badge className="bg-red-600">{t("profile.rejected")}</Badge> :
+                      <Badge>{t("profile.pending")}</Badge>
                 }
               </TableCell>
             </TableRow>

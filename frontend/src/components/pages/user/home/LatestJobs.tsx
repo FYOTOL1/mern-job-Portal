@@ -1,14 +1,18 @@
+import { useTranslation } from "react-i18next";
 import { useAppSelector } from "../../../../hooks/toolkitHooks";
 import LatestJobCard from "../../../shared/LatestJobCard";
 import { motion } from "framer-motion"
 
 const LatestJobs = () => {
-  const { allJobs } = useAppSelector(state => state.job)
+  const
+    { allJobs } = useAppSelector(state => state.job),
+    { t } = useTranslation()
 
   return (
     <div className="max-w-7xl mx-auto my-20">
       <h1 className="text-4xl font-bold">
-        <span className="text-[#6A38C2]">Latest & Top</span> Job Openings
+        <span className="text-[#6A38C2]">{t("home.latestJobs.title").slice(0, 12)}</span>
+        {t("home.latestJobs.title").slice(12)}
       </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 my-5">
         {

@@ -8,14 +8,22 @@ import { Button } from "../ui/button";
 import { LogOut, User2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/toolkitHooks";
-import { LogoutUser } from "../../store/slices/authSlice";
+import { LogoutUser, setLanguage } from "../../store/slices/authSlice";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import { useTranslation } from "react-i18next";
 
 const NavBar = () => {
-  const { user } = useAppSelector((state) => state.auth);
-  const dispatch = useAppDispatch()
+  const
+    { user, lang } = useAppSelector((state) => state.auth),
+    dispatch = useAppDispatch(),
+    { t } = useTranslation()
 
   const logoutHandler = async () => {
     dispatch(LogoutUser(""))
+  }
+
+  const changeLanguageHandler = (lang: "ar" | "en") => {
+    dispatch(setLanguage(lang))
   }
 
   return (
@@ -31,23 +39,38 @@ const NavBar = () => {
           <ul className="flex items-center font-medium gap-5 mt-2 sm:mt-0">
             {user && user.role === "recruiter" ?
               <>
-                <li className="transition-all hover:text-gray-600"><Link to="/admin/companies">Companies</Link></li>
-                <li className="transition-all hover:text-gray-600"><Link to="/admin/jobs">Jobs</Link></li>
+                <li className="transition-all hover:text-gray-600"><Link to="/admin/companies">{t("shared.navBar.ul.companies")}</Link></li>
+                <li className="transition-all hover:text-gray-600"><Link to="/admin/jobs">{t("shared.navBar.ul.jobs")}</Link></li>
               </> :
               <>
-                <li className="transition-all hover:text-gray-600"><Link to="/">Home</Link></li>
-                <li className="transition-all hover:text-gray-600"><Link to="/jobs">Jobs</Link></li>
-                <li className="transition-all hover:text-gray-600"><Link to="/browse">Browse</Link></li>
+                <li className="transition-all hover:text-gray-600"><Link to="/">{t("shared.navBar.ul.home")}</Link></li>
+                <li className="transition-all hover:text-gray-600"><Link to="/jobs">{t("shared.navBar.ul.jobs")}</Link></li>
+                <li className="transition-all hover:text-gray-600"><Link to="/browse">{t("shared.navBar.ul.browse")}</Link></li>
               </>}
+            <li>
+              <Select defaultValue={lang} onValueChange={changeLanguageHandler}>
+                <SelectTrigger className="mt-2 h-fit px-2 py-1">
+                  <SelectValue placeholder="en" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectItem value="en" className="cursor-pointer">en</SelectItem>
+                    <SelectItem value="ar" className="cursor-pointer">ar</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </li>
           </ul>
           {!user ? (
             <div className="flex items-center gap-2">
               <Link to={"/login"}>
-                <Button variant={"outline"}>Login</Button>
+                <Button variant={"outline"}>
+                  {t("shared.navBar.login")}
+                </Button>
               </Link>
               <Link to={"/signup"}>
                 <Button className="bg-[#6A38C2] hover:bg-[#5b38a6]">
-                  Signup
+                  {t("shared.navBar.signup")}
                 </Button>
               </Link>
             </div>
@@ -84,12 +107,12 @@ const NavBar = () => {
                     <>
                       <div className="flex w-fit items-center gap-2 cursor-pointer">
                         <User2 />
-                        <Button variant={"link"}><Link to="/profile">View Profile</Link></Button>
+                        <Button variant={"link"}><Link to="/profile">{t("shared.navBar.profile")}</Link></Button>
                       </div>
                     </>}
                   <div className="flex w-fit items-center gap-2 cursor-pointer">
                     <LogOut />
-                    <Button onClick={() => logoutHandler()} variant={"link"}>Logout</Button>
+                    <Button onClick={() => logoutHandler()} variant={"link"}>{t("shared.navBar.logout")}</Button>
                   </div>
                 </div>
               </PopoverContent>
